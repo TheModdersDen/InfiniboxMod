@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+F:\MCP\Infinibox\eclipse\.metadata\.plugins\org.eclipse.jdt.core
+286606776.index

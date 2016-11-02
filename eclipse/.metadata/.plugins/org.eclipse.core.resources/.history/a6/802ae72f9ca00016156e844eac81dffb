@@ -1,0 +1,5 @@
+package com.monsterspawned.infinibox.cmds;
+
+public class InfiniboxCommand {
+
+}

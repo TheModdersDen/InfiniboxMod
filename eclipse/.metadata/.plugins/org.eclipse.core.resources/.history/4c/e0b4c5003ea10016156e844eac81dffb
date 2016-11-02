@@ -1,0 +1,8 @@
+package com.monsterspawned.infinibox.entities;
+
+public enum EntityType {
+	NONE,
+	AGGRESSIVE,
+	NEUTRAL,
+	PEACEFUL,
+}

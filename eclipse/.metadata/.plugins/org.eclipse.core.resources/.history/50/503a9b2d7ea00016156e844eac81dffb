@@ -1,0 +1,19 @@
+[
+{
+  "modid" : "infinibox",
+  "name" : "The Infinibox",  
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url" : "",
+  "credits" : "The Infinibox Devs",
+  "authorList": [
+    "TheModdersDen",
+    "ColesBoys",
+    "thecreator12345"
+  ],
+  "description": "Video player and other display mechanics for Minecraft.",
+  "logoFile" : "",
+  "parent" : "",
+  "screenshots": []
+}
+]

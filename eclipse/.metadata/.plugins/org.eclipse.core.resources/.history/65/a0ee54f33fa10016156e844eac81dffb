@@ -1,0 +1,19 @@
+[
+{
+  "modid" : "infinibox",
+  "name" : "The Infinibox",  
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url" : "",
+  "credits" : "The Infinibox Devs, and the SKCraft Team for some code. Namely the PlayBlock code",
+  "authorList": [
+    "TheModdersDen",
+    "ColesBoys",
+    "thecreator12345"
+  ],
+  "description": "The Minecraft experience of your dreams... IN REALITY!",
+  "logoFile" : "",
+  "parent" : "",
+  "screenshots": []
+}
+]

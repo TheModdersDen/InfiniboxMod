@@ -1,0 +1,25 @@
+package com.monsterspawned.infinibox.cmds;
+
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.ICommandSender;
+
+public class InfiniboxCommand extends CommandBase{
+
+	@Override
+	public String getCommandName() {
+		return "infinibox";
+	}
+
+	@Override
+	public String getCommandUsage(ICommandSender p_71518_1_) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void processCommand(ICommandSender p_71515_1_, String[] p_71515_2_) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

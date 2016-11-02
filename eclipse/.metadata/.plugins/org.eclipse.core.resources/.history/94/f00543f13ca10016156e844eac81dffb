@@ -1,0 +1,12 @@
+package com.pahimar.letsmodreboot.item;
+
+import com.monsterspawned.infinibox.reference.Names;
+
+public class ItemMapleLeaf extends ItemLMRB
+{
+    public ItemMapleLeaf()
+    {
+        super();
+        this.setUnlocalizedName(Names.Items.MAPLE_LEAF);
+    }
+}
