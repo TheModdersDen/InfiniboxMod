@@ -1,0 +1,10 @@
+package com.monsterspawned.infinibox.misc;
+
+public class DevStuff {
+	
+	public void AddDevSpecialties()
+	{
+		
+	}
+
+}

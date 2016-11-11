@@ -1,0 +1,20 @@
+package com.monsterspawned.infinibox.misc;
+
+import com.skcraft.playblock.PlayBlock;
+
+import net.minecraft.nbt.NBTTagCompound;
+
+public class MiscUtils {
+	
+	private PlayBlock pb = PlayBlock.instance;
+	private MediaPlayer mediaPlayer;
+	
+	public void SetPlayBlockURI(String URI)
+	{
+		mediaPlayer.setUri(uri);
+		NBTTagCompound tag = new NBTTagCompound();
+		mediaPlayer.writeNetworkedNBT(tag);
+		mediaPlayer.fireNetworkedNbt(tag);	
+	}
+	
+}

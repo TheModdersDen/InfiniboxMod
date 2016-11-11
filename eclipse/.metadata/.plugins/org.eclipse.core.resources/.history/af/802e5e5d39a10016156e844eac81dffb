@@ -1,9 +1,0 @@
-package com.monsterspawned.infinibox.entities;
-
-public class InfiniboxFriend {
-
-	public static void main(String[] args) {
-		phoenix
-	}
-
-}

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.skcraft.playblock.PlayBlock"/>
 <fullyQualifiedTypeName name="net.minecraft.util.ChatComponentText"/>
 <fullyQualifiedTypeName name="com.monsterspawned.infinibox.creativetab.InfiniboxBlocks"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.monster.EntityMob"/>
 <fullyQualifiedTypeName name="net.minecraft.item.ItemRecord"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="net.minecraft.client.renderer.texture.IIconRegister"/>
-<fullyQualifiedTypeName name="com.monsterspawned.infinibox.reference.Reference"/>
 <fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
-<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
-<fullyQualifiedTypeName name="net.minecraft.world.World"/>
 <fullyQualifiedTypeName name="net.minecraft.init.Blocks"/>
 <fullyQualifiedTypeName name="net.minecraft.block.BlockJukebox"/>
 <fullyQualifiedTypeName name="net.minecraft.item.Item"/>
@@ -20,4 +15,38 @@
 <fullyQualifiedTypeName name="net.minecraft.item.EnumRarity"/>
 <fullyQualifiedTypeName name="net.minecraft.util.ResourceLocation"/>
 <fullyQualifiedTypeName name="net.minecraft.item.ItemSword"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockTNT"/>
+<fullyQualifiedTypeName name="com.monsterspawned.infinibox.creativetab.InfiniboxTab"/>
+<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
+<fullyQualifiedTypeName name="net.minecraft.util.IIcon"/>
+<fullyQualifiedTypeName name="com.monsterspawned.infinibox.Infinibox"/>
+<fullyQualifiedTypeName name="net.minecraft.world.Explosion"/>
+<fullyQualifiedTypeName name="net.minecraft.client.renderer.texture.IIconRegister"/>
+<fullyQualifiedTypeName name="com.monsterspawned.infinibox.reference.Names.Items"/>
+<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
+<fullyQualifiedTypeName name="com.monsterspawned.infinibox.block.ExplosiveType"/>
+<fullyQualifiedTypeName name="com.monsterspawned.infinibox.reference.Reference"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.item.EntityTNTPrimed"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.EntityLivingBase"/>
+<fullyQualifiedTypeName name="net.minecraft.client.Minecraft"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
+<fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntity"/>
+<fullyQualifiedTypeName name="net.minecraft.server.gui.IUpdatePlayerListBox"/>
+<fullyQualifiedTypeName name="net.minecraft.world.World"/>
+<fullyQualifiedTypeName name="com.skcraft.playblock.PlayBlock"/>
+<fullyQualifiedTypeName name="com.skcraft.playblock.player.MediaPlayer"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.eventhandler.SubscribeEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.world.WorldEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.entity.living.LivingDropsEvent"/>
+<fullyQualifiedTypeName name="net.minecraft.util.DamageSource"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.entity.player.PlayerSleepInBedEvent"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.client.event.EntityViewRenderEvent.FogColors"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.relauncher.SideOnly"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.relauncher.Side"/>
+<fullyQualifiedTypeName name="net.minecraftforge.event.entity.EntityJoinWorldEvent"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.gameevent.TickEvent"/>
+<fullyQualifiedTypeName name="net.minecraft.world.WorldSavedData"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.eventhandler.Event.Result"/>
 </qualifiedTypeNameHistroy>

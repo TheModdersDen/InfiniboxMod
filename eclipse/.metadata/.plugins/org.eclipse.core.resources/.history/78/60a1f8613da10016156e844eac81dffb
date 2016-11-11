@@ -1,5 +1,0 @@
-package com.monsterspawned.infinibox.entities;
-
-public enum EntityType {
-
-}

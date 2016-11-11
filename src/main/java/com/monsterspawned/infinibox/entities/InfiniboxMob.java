@@ -21,7 +21,8 @@ public class InfiniboxMob extends EntityMob{
 	protected boolean canBreakDoors = true;
 	protected boolean attackVillagers = true;
 	protected boolean isGiant = false;
-	
+	protected boolean attackPlayer = false;
+	protected float scale = 1.0F;
 	protected MobType mobType = MobType.NONE;
 	
 	protected double followRange = 40.0D;
@@ -40,9 +41,20 @@ public class InfiniboxMob extends EntityMob{
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
-        this.setSize(0.6F, 1.8F);
+        if(attackVillagers)
+        {
+        	this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
+        }
+        if(attackPlayer)
+        {
+        	this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        }
+        if(isGiant)
+        {
+        	this.setSize(0.6F * scale, 1.8F * scale);
+        } else {
+        	this.setSize(0.6F, 1.8F);
+        }
     }
 
     protected void applyEntityAttributes()

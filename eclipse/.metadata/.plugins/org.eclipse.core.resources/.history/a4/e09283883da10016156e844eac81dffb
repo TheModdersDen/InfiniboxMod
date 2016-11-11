@@ -1,7 +1,0 @@
-package com.monsterspawned.infinibox.entities;
-
-import net.minecraft.entity.monster.EntityMob;
-
-public class InfiniboxMob extends EntityMob{
-
-}

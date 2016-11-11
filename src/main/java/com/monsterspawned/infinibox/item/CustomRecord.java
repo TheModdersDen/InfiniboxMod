@@ -73,7 +73,6 @@ public class CustomRecord extends ItemRecord{
 	
 	
 	@Override
-	//TODO: getRecordTitle()
 	public String getRecordNameLocal()
 	{
 		 return StatCollector.translateToLocal(this.getUnlocalizedName() + ".desc");

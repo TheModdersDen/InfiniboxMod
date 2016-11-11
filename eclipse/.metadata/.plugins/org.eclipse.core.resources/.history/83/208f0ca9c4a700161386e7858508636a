@@ -1,0 +1,26 @@
+package com.monsterspawned.infinibox.misc;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+
+public class DevStuff {
+	
+	private EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+	
+	public void AddDevSpecialties()
+	{
+		if(player.getDisplayName() == "TheModdersDen")
+		{
+			
+		} else if(player.getDisplayName() == "colesboys") {
+			
+		} else if(player.getDisplayName() == "thecreator12345") {
+			
+		} else if(player.getDisplayName() == "") {
+			
+		} else if(player.getDisplayName() == "") {
+			
+		}
+	}
+
+}

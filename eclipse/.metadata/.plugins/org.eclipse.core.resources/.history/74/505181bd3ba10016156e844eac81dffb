@@ -1,7 +1,0 @@
-package com.monsterspawned.infinibox.entities;
-
-public enum MobType {
-	PEACEFUL,
-	AGGRESSIVE,
-	NEUTRAL,
-}

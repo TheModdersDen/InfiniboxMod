@@ -19,5 +19,6 @@ public enum ExplosiveType{
 	EMP,
 	BASS_CANNON,
 	EVIL,
+	DENO_BOOM, //"KABOOM!" - TF2 Sound by Denoman
 	
 }

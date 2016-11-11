@@ -1,0 +1,109 @@
+package com.monsterspawned.infinibox.handler;
+
+import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.DamageSource;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.world.WorldEvent;
+
+public class EventHandler
+{
+//	@SubscribeEvent
+//	public void loadWorld(WorldEvent.Load event)
+//	{
+//		if (!event.world.isRemote && event.world.provider.getDimensionId() == 0)
+//		{
+//			BloodmoonHandler.INSTANCE = (BloodmoonHandler) event.world.getMapStorage().loadData(BloodmoonHandler.class, "Bloodmoon");
+//
+//			if (BloodmoonHandler.INSTANCE == null)
+//			{
+//				BloodmoonHandler.INSTANCE = new BloodmoonHandler();
+//				BloodmoonHandler.INSTANCE.markDirty();
+//			}
+//
+//			event.world.getMapStorage().setData("Bloodmoon", BloodmoonHandler.INSTANCE);
+//
+//			BloodmoonHandler.INSTANCE.updateClients();
+//		}
+//	}
+//
+//	@SubscribeEvent
+//	public void livingDrops(LivingDropsEvent event)
+//	{
+//		if (!event.entityLiving.worldObj.isRemote)
+//		{
+//			if (event.source == DamageSource.outOfWorld && event.entityLiving.getEntityData().getBoolean("bloodmoonSpawned"))
+//			{
+//				event.setCanceled(true);
+//			}
+//		}
+//	}
+//
+//	@SubscribeEvent
+//	public void livingUpdate(LivingUpdateEvent event)
+//	{
+//		if (BloodmoonConfig.VANISH && BloodmoonHandler.INSTANCE != null && event.entityLiving.dimension == 0 && !event.entityLiving.worldObj.isRemote && !BloodmoonHandler.INSTANCE.isBloodmoonActive() && event.entityLiving.worldObj.getTotalWorldTime() % 20 == 0 && Math.random() <= 0.2f)
+//		{
+//			if (event.entityLiving.getEntityData().getBoolean("bloodmoonSpawned"))
+//			{
+//				event.entityLiving.onKillCommand();
+//			}
+//		}
+//	}
+//
+//	@SubscribeEvent
+//	public void sleepInBed(PlayerSleepInBedEvent event)
+//	{
+//		if (BloodmoonHandler.INSTANCE != null && BloodmoonConfig.NO_SLEEP)
+//		{
+//			if (Bloodmoon.proxy.isBloodmoon())
+//			{
+//				event.result = EnumStatus.OTHER_PROBLEM;
+//				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.bloodmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+//			}
+//		}
+//	}
+//
+//	@SubscribeEvent
+//	public void onConfigChange(OnConfigChangedEvent event)
+//	{
+//		Bloodmoon.config.onConfigChange(event);
+//	}
+//
+//	@SubscribeEvent
+//	@SideOnly(Side.CLIENT)
+//	public void fogColor(FogColors event)
+//	{
+//		if (BloodmoonConfig.BLACK_FOG && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+//		{
+//			event.red = Math.max(event.red - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
+//			event.green = Math.max(event.green - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
+//			event.blue = Math.max(event.blue - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
+//		}
+//	}
+//
+//	@SubscribeEvent
+//	public void playerJoinedWorld(EntityJoinWorldEvent event)
+//	{
+//		if (BloodmoonHandler.INSTANCE != null && !event.world.isRemote)
+//		{
+//			BloodmoonHandler.INSTANCE.playerJoinedWorld(event);
+//		}
+//	}
+//
+//	@SubscribeEvent
+//	public void endWorldTick(TickEvent.WorldTickEvent event)
+//	{
+//		if (BloodmoonHandler.INSTANCE != null)
+//		{
+//			BloodmoonHandler.INSTANCE.endWorldTick(event);
+//		}
+//	}
+}

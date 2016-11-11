@@ -1,0 +1,15 @@
+package com.monsterspawned.infinibox.misc;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+
+public class DevStuff {
+	
+	private EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+	
+	public void AddDevSpecialties()
+	{
+		if()
+	}
+
+}
