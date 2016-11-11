@@ -1,0 +1,12 @@
+package com.monsterspawned.infinibox.entities;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.world.World;
+
+public class CustomTNTPrimed extends EntityLivingBase{
+
+	public CustomTNTPrimed(World world, float f, float g, float h, EntityLivingBase p_150114_6_) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

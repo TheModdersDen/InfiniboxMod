@@ -1,0 +1,17 @@
+package com.monsterspawned.infinibox.misc;
+
+public enum Events {
+	NONE,
+    HALLOWEEN,
+    THANKSGIVING,
+    BLACK_FRIDAY,
+    CHRISTMAS,
+    NEW_YEARS,
+    VALENTINES_DAY,
+    APRIL_FOOLS,
+    ST_PATRICKS_DAY,
+    MEMORIAL_DAY,
+    SCHOOLS_OUT,
+    JULY_FOURTH,
+    BACK_TO_SCHOOL,
+}

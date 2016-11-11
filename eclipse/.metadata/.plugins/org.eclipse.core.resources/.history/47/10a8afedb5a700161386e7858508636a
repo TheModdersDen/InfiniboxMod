@@ -1,0 +1,5 @@
+package com.monsterspawned.infinibox.block;
+
+public class CustomExplosive extends BlockTNT{
+
+}

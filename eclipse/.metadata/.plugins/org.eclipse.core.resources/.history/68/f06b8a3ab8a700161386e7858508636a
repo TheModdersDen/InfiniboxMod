@@ -1,0 +1,14 @@
+package com.monsterspawned.infinibox.block;
+
+public enum ExplosiveType{
+	
+	NUKE,
+	TNT_RAIN,
+	FLARE,
+	AIR_STRIKE,
+	C4,
+	FIREWORK,
+	PLEASE_NO,
+	WEATHER_TNT,
+
+}

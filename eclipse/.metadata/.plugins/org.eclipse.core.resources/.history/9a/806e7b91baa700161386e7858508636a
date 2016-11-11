@@ -1,0 +1,28 @@
+package com.monsterspawned.infinibox.entities;
+
+import com.monsterspawned.infinibox.block.ExplosiveType;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public class CustomTNTPrimed extends EntityTNTPrimed{
+
+	private ExplosiveType type = ExplosiveType.NONE;
+	private int fuse = 80;
+	
+	public CustomTNTPrimed(World world, float f, float g, float h, EntityLivingBase livingBase, ExplosiveType type) {
+		super(world);
+	}
+	
+	public void SetFuse(int newFuse)
+	{
+		this.fuse = newFuse;
+	}
+	
+	public int GetFuse()
+	{
+		return fuse;
+	}
+}

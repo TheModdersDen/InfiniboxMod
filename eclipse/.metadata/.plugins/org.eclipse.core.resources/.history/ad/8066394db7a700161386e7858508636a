@@ -1,0 +1,19 @@
+package com.monsterspawned.infinibox.block;
+
+import com.monsterspawned.infinibox.creativetab.InfiniboxTab;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockTNT;
+
+public class CustomExplosive extends BlockTNT{
+	
+	public float hardness = 0.0F;
+	
+	public CustomExplosive(float hardness)
+	{
+		this.setHardness(0.0F);
+		this.setStepSound(Block.soundTypeGrass);
+        this.setCreativeTab(InfiniboxTab.InfiniboxTab);
+	}
+
+}

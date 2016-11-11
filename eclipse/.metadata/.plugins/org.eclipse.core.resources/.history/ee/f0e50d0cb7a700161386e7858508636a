@@ -1,0 +1,12 @@
+package com.monsterspawned.infinibox.block;
+
+import net.minecraft.block.BlockTNT;
+
+public class CustomExplosive extends BlockTNT{
+	
+	public CustomExplosive()
+	{
+		
+	}
+
+}

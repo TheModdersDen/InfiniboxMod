@@ -1,0 +1,36 @@
+package com.monsterspawned.infinibox.entities;
+
+import com.monsterspawned.infinibox.block.ExplosiveType;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public class CustomTNTPrimed extends EntityTNTPrimed{
+
+	private ExplosiveType type = ExplosiveType.NONE;
+	private int fuse = 80;
+	
+	public CustomTNTPrimed(World world, float f, float g, float h, EntityLivingBase livingBase, ExplosiveType type) {
+		super(world);
+	}
+
+	@Override
+	public void setCurrentItemOrArmor(int p_70062_1_, ItemStack p_70062_2_) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void SetFuse(int newFuse)
+	{
+		this.fuse = newFuse;
+	}
+
+	@Override
+	public ItemStack[] getLastActiveItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

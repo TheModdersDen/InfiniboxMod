@@ -96,6 +96,6 @@ public class CustomRecord extends ItemRecord{
 	@Override
 	public ResourceLocation getRecordResource(String name)
 	{
-		 return new ResourceLocation(Reference.MOD_ID + ":record_" + recordName);
+		 return new ResourceLocation(Reference.MOD_ID + ":record_" + name);
 	}
 }
