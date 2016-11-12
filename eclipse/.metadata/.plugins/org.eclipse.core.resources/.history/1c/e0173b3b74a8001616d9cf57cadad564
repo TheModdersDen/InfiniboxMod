@@ -1,0 +1,21 @@
+package com.monsterspawned.infinibox.proxy;
+
+public class ServerProxy extends CommonProxy
+{
+    @Override
+    public void registerKeyBindings()
+    {
+        // NOOP
+    }
+
+	public void registerRenderers() {
+		// TODO Add entity render files...
+		
+	}
+
+	@Override
+	public void registerDevThings() {
+		// TODO Add stuff for devs
+		
+	}
+}

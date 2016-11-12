@@ -1,0 +1,14 @@
+# Configuration file
+
+general {
+    # Can Slendy spawn [default: false]
+    B:canSlendySpawn=false
+
+    # This is an example configuration value [default: false]
+    B:configValue=false
+
+    # Slendy ID [range: 0 ~ 2000, default: 3]
+    I:slendyID=3
+}
+
+

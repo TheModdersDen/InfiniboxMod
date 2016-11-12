@@ -1,0 +1,961 @@
+/*     */ package com.monsterspawned.infinibox.entities.aggressive;
+/*     */ 
+/*     */ import java.util.Random;
+/*     */ import net.dudgames.slender.common.SlenderMan;
+/*     */ import net.minecraft.block.Block;
+/*     */ import net.minecraft.entity.Entity;
+/*     */ import net.minecraft.entity.EntityLivingBase;
+/*     */ import net.minecraft.entity.SharedMonsterAttributes;
+/*     */ import net.minecraft.entity.ai.attributes.IAttributeInstance;
+/*     */ import net.minecraft.entity.monster.EntityMob;
+/*     */ import net.minecraft.entity.player.EntityPlayer;
+/*     */ import net.minecraft.init.Blocks;
+/*     */ import net.minecraft.init.Items;
+/*     */ import net.minecraft.item.Item;
+/*     */ import net.minecraft.item.ItemStack;
+/*     */ import net.minecraft.potion.Potion;
+/*     */ import net.minecraft.util.AxisAlignedBB;
+/*     */ import net.minecraft.util.DamageSource;
+/*     */ import net.minecraft.util.MathHelper;
+/*     */ import net.minecraft.util.MovingObjectPosition;
+/*     */ import net.minecraft.util.Vec3;
+/*     */ import net.minecraft.world.World;
+/*     */ 
+/*     */ public class Slendy extends EntityMob
+/*     */ {
+/*     */   private int breakLight;
+/*     */   private int breakNextLight;
+/*     */   public static int musictimer;
+/*     */   private boolean destroyPerGo;
+/*     */   private boolean canSeeSkyAndDay;
+/*     */   private int petrifyTimer;
+/*     */   private boolean timeLocked;
+/*  33 */   private int timeTillNextTeleport = 0;
+/*  34 */   private int Teleport200 = 0;
+/*  35 */   private int Teleport100 = 0;
+/*  36 */   private int[] seeThrough = { 20, 8, 9, 10, 11, 18, 27, 28, 30, 31, 32, 37, 38, 39, 40, 44, 50, 51, 52, 59, 64, 65, 66, 67, 69, 70, 71, 72, 75, 76, 77, 78, 83, 85, 90, 92, 96, 101, 102, 106, 107, 108, 109, 111, 113, 114, 114, 117 };
+/*  37 */   private int ScaryTimer = 0;
+/*  38 */   private int directlookscare = 0;
+/*  39 */   private int potiontimer = 0;
+/*     */   private double randZonCircle;
+/*     */   private double randXonCircle;
+/*  42 */   public static float opacity = 0.0F;
+/*     */   
+/*  44 */   private int staticsoundtimer = 20;
+/*     */   
+/*     */   public Slendy(World var1)
+/*     */   {
+/*  48 */     super(var1);
+/*  49 */     field_70138_W = 5.0F;
+/*  50 */     func_70105_a(0.8F, 2.5F);
+/*  51 */     field_70178_ae = true;
+/*  52 */     breakNextLight = field_70146_Z.nextInt(100);
+/*  53 */     if ((!SlenderMan.canSpawn) && (!field_70170_p.field_72995_K)) {
+/*  54 */       func_70106_y();
+/*     */     }
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   protected Item func_146068_u()
+/*     */   {
+/*  64 */     return SlenderMan.itemChildSoul;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   protected void func_70628_a(boolean var1, int var2)
+/*     */   {
+/*  73 */     Item var3 = func_146068_u();
+/*  74 */     int var4 = field_70146_Z.nextInt(2 + var2);
+/*     */     
+/*  76 */     for (int var5 = 0; var5 < var4; var5++)
+/*     */     {
+/*  78 */       func_145779_a(var3, 1);
+/*     */     }
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   protected void func_110147_ax()
+/*     */   {
+/*  85 */     super.func_110147_ax();
+/*  86 */     func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(100.0D);
+/*  87 */     func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.0D);
+/*  88 */     func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(20.0D);
+/*  89 */     func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(100.0D);
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   protected Entity func_70782_k()
+/*     */   {
+/* 101 */     EntityPlayer var1 = field_70170_p.func_72890_a(this, 200.0D);
+/* 102 */     return (var1 != null) && (canSlendermanBeSeen(var1)) ? var1 : null;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   protected boolean teleportRandomly()
+/*     */   {
+/* 108 */     double var1 = field_70165_t + (field_70146_Z.nextDouble() - 0.5D) * 12.0D;
+/* 109 */     double var3 = field_70163_u + (field_70146_Z.nextInt(64) - 32);
+/* 110 */     double var5 = field_70161_v + (field_70146_Z.nextDouble() - 0.5D) * 12.0D;
+/* 111 */     return teleportTo1(var1, var3, var5);
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public double randomXonCircle(int radius1, int radius2, double SlendyposX)
+/*     */   {
+/* 125 */     int radius = radius2 - radius1;
+/* 126 */     double angle = Math.random() * 3.141592653589793D * 2.0D;
+/* 127 */     randXonCircle = (SlendyposX + radius * Math.cos(angle));
+/* 128 */     return randXonCircle;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public double randomZonCircle(int radius1, int radius2, double SlendyposZ)
+/*     */   {
+/* 142 */     int radius = radius2 - radius1;
+/* 143 */     double angle = Math.random() * 3.141592653589793D * 2.0D;
+/* 144 */     randZonCircle = (SlendyposZ + radius * Math.sin(angle));
+/* 145 */     return randZonCircle;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public void func_70071_h_()
+/*     */   {
+/* 155 */     super.func_70071_h_();
+/*     */     
+/* 157 */     if (!field_70170_p.field_72995_K)
+/*     */     {
+/* 159 */       field_70170_p.func_72869_a("depthsuspend", field_70165_t + (field_70146_Z.nextDouble() - 0.5D) * field_70130_N, field_70163_u + field_70146_Z.nextDouble() * field_70131_O - 0.25D, field_70161_v + (field_70146_Z.nextDouble() - 0.5D) * field_70130_N, 1.0D + field_70146_Z.nextDouble(), 1.0D + field_70146_Z.nextDouble(), 1.0D + field_70146_Z.nextDouble());
+/* 160 */       EntityPlayer var3 = field_70170_p.func_72890_a(this, 200.0D);
+/* 161 */       destroyPerGo = false;
+/* 162 */       field_70703_bu = false;
+/*     */       
+/*     */ 
+/* 165 */       if (timeTillNextTeleport < 100) timeTillNextTeleport += 1;
+/* 166 */       if (Teleport200 < 800) Teleport200 += 1;
+/* 167 */       if (Teleport100 < 400) Teleport100 += 1;
+/* 168 */       if (directlookscare < 60) directlookscare += 1;
+/* 169 */       if (potiontimer < 200) potiontimer += 1;
+/* 170 */       if (ScaryTimer < 300) ScaryTimer += 1;
+/* 171 */       if (staticsoundtimer < 20) { staticsoundtimer += 1;
+/*     */       }
+/*     */       
+/*     */ 
+/*     */ 
+/* 176 */       if ((getDistancetoEntityToAttack() >= 100.0D) && (getDistancetoEntityToAttack() <= 250.0D) && (getDistancetoEntityToAttack() <= 200.0D) && (Teleport200 == 800))
+/*     */       {
+/* 178 */         double newRandX = randomXonCircle(60, 120, field_70165_t);
+/* 179 */         double newRandZ = randomZonCircle(60, 120, field_70161_v);
+/* 180 */         teleportTo1(newRandX, field_70163_u, newRandZ);
+/* 181 */         Teleport200 = 0;
+/*     */       }
+/*     */       
+/* 184 */       if ((getDistancetoEntityToAttack() >= 65.0D) && (getDistancetoEntityToAttack() <= 99.0D) && (getDistancetoEntityToAttack() <= 200.0D) && (Teleport100 == 400))
+/*     */       {
+/* 186 */         double newRandX = randomXonCircle(40, 75, field_70165_t);
+/* 187 */         double newRandZ = randomZonCircle(40, 75, field_70161_v);
+/* 188 */         teleportTo1(newRandX, field_70163_u, newRandZ);
+/* 189 */         Teleport100 = 0;
+/* 190 */         Random randomer = new Random();
+/* 191 */         int playscarynoise = randomer.nextInt(5);
+/* 192 */         if ((ScaryTimer == 300) && (playscarynoise == 5))
+/*     */         {
+/* 194 */           field_70170_p.func_72956_a(var3, "dg_slender:scare", func_70599_aP(), 1.0F);
+/* 195 */           ScaryTimer = 0;
+/*     */         }
+/*     */       }
+/*     */       
+/*     */ 
+/* 200 */       if ((getDistancetoEntityToAttack() <= 64.0D) && (musictimer == 2400))
+/*     */       {
+/* 202 */         field_70170_p.func_72956_a(this, "dg_slender:close", func_70599_aP() + 10.0F, 1.0F);
+/* 203 */         musictimer = 0;
+/*     */       }
+/*     */       
+/*     */ 
+/* 207 */       if ((field_70789_a != null) && ((field_70789_a instanceof EntityPlayer)))
+/*     */       {
+/* 209 */         if ((canSlendermanBeSeen((EntityPlayer)field_70789_a)) && (getDistancetoEntityToAttack() <= 100.0D))
+/*     */         {
+/* 211 */           float level = (float)getDistancetoEntityToAttack();
+/* 212 */           opacity = 1.5F / level;
+/* 213 */           if (staticsoundtimer == 20)
+/*     */           {
+/* 215 */             field_70170_p.func_72956_a(this, "dg_slender:static", func_70599_aP() + opacity * 4.0F, 1.0F);
+/* 216 */             staticsoundtimer = 0;
+/*     */           }
+/*     */         }
+/* 219 */         else if (!canSlendermanBeSeen((EntityPlayer)field_70789_a))
+/*     */         {
+/* 221 */           opacity = 0.0F;
+/*     */         }
+/*     */         
+/* 224 */         if (!canSlendermanBeSeen((EntityPlayer)field_70789_a))
+/*     */         {
+/* 226 */           if ((getDistancetoEntityToAttack() <= 64.0D) && (getDistancetoEntityToAttack() >= 16.0D) && (timeTillNextTeleport == 100))
+/*     */           {
+/* 228 */             double newRandX = randomXonCircle(10, 40, field_70165_t);
+/* 229 */             double newRandZ = randomZonCircle(10, 40, field_70161_v);
+/*     */             
+/* 231 */             teleportTo1(newRandX, field_70163_u, newRandZ);
+/* 232 */             timeTillNextTeleport = 0;
+/*     */           }
+/*     */           
+/* 235 */           if ((getDistancetoEntityToAttack() <= 15.0D) && (timeTillNextTeleport == 100))
+/*     */           {
+/* 237 */             double newRandX = randomXonCircle(3, 10, field_70165_t);
+/* 238 */             double newRandZ = randomZonCircle(3, 10, field_70161_v);
+/*     */             
+/* 240 */             teleportTo1(newRandX, field_70163_u, newRandZ);
+/* 241 */             if (ScaryTimer == 300)
+/*     */             {
+/* 243 */               field_70170_p.func_72956_a(var3, "dg_slender:scare", func_70599_aP(), 1.0F);
+/* 244 */               ScaryTimer = 0;
+/*     */             }
+/* 246 */             timeTillNextTeleport = 0;
+/*     */           }
+/*     */         }
+/*     */         
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/* 266 */         if (isPlayerLooking(var3))
+/*     */         {
+/* 268 */           petrifyTimer = 20;
+/*     */         }
+/*     */         
+/*     */ 
+/* 272 */         if ((field_70170_p.func_72883_k(MathHelper.func_76128_c(field_70165_t), MathHelper.func_76128_c(field_70163_u), MathHelper.func_76128_c(field_70161_v)) < 1) && (field_70170_p.func_72883_k(MathHelper.func_76128_c(field_70789_a.field_70165_t), MathHelper.func_76128_c(field_70789_a.field_70163_u), MathHelper.func_76128_c(field_70789_a.field_70161_v)) < 1))
+/*     */         {
+/* 274 */           field_70170_p.func_72956_a(this, "dg_slender:attack", func_70599_aP(), ((field_70146_Z.nextFloat() - field_70146_Z.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+/*     */         }
+/*     */         
+/* 277 */         if ((petrifyTimer <= 20) && (petrifyTimer >= 15) && (potiontimer == 200))
+/*     */         {
+/*     */ 
+/* 280 */           field_70159_w *= 0.01D;
+/* 281 */           field_70179_y *= 0.01D;
+/*     */           
+/* 283 */           ((EntityLivingBase)field_70789_a).func_70690_d(new net.minecraft.potion.PotionEffect(field_76431_kfield_76415_H, 100, 2));
+/* 284 */           ((EntityLivingBase)field_70789_a).func_70690_d(new net.minecraft.potion.PotionEffect(field_76440_qfield_76415_H, 100, 2));
+/*     */           
+/* 286 */           field_70702_br = (field_70701_bs = 5.0F);
+/* 287 */           teleportToEntity(var3);
+/*     */           
+/* 289 */           petrifyTimer -= 1;
+/* 290 */           potiontimer -= 1;
+/* 291 */           potiontimer -= 1;
+/* 292 */           potiontimer -= 1;
+/*     */           
+/* 294 */           if (directlookscare == 60)
+/*     */           {
+/* 296 */             field_70170_p.func_72956_a(var3, "dg_slender:lights", func_70599_aP(), ((field_70146_Z.nextFloat() - field_70146_Z.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+/* 297 */             directlookscare = 0;
+/*     */           }
+/*     */         }
+/*     */         
+/* 301 */         if (((field_70789_a instanceof EntityPlayer)) && ((canSlendermanBeSeen((EntityPlayer)field_70789_a)) || (timeLocked)))
+/*     */         {
+/* 303 */           slendermanDirectLook((EntityPlayer)field_70789_a);
+/* 304 */           field_70702_br = (field_70701_bs = 0.0F);
+/* 305 */           breakLight += 1;
+/*     */           
+/* 307 */           if ((breakLight >= breakNextLight) && (!canSeeSkyAndDay))
+/*     */           {
+/* 309 */             breakLight = 0;
+/* 310 */             breakNextLight = field_70146_Z.nextInt(100);
+/* 311 */             findNearestTorch();
+/*     */           }
+/*     */         }
+/*     */         else
+/*     */         {
+/* 316 */           func_70625_a(field_70789_a, 100.0F, 100.0F);
+/*     */         }
+/*     */       }
+/*     */     }
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   protected void func_70619_bc()
+/*     */   {
+/* 329 */     super.func_70619_bc();
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   public boolean func_70104_M()
+/*     */   {
+/* 335 */     return true;
+/*     */   }
+/*     */   
+/*     */   private boolean isPlayerLooking(EntityPlayer par1EntityPlayer)
+/*     */   {
+/* 340 */     if (par1EntityPlayer != null)
+/*     */     {
+/* 342 */       ItemStack var2 = field_71071_by.field_70460_b[3];
+/*     */       
+/* 344 */       if ((var2 != null) && (var2.func_77973_b() == SlenderMan.itemSlenderMask))
+/*     */       {
+/* 346 */         return false;
+/*     */       }
+/*     */       
+/*     */ 
+/*     */ 
+/* 351 */       Vec3 var3 = par1EntityPlayer.func_70676_i(1.0F).func_72432_b();
+/* 352 */       Vec3 var4 = Vec3.func_72443_a(field_70165_t - field_70165_t, field_70121_D.field_72338_b + field_70131_O / 2.0F - (field_70163_u + par1EntityPlayer.func_70047_e()), field_70161_v - field_70161_v);
+/* 353 */       double var5 = var4.func_72433_c();
+/* 354 */       var4 = var4.func_72432_b();
+/* 355 */       double var7 = var3.func_72430_b(var4);
+/* 356 */       return var7 > 1.0D - 0.025D / var5 ? par1EntityPlayer.func_70685_l(this) : false;
+/*     */     }
+/*     */     
+/* 359 */     return false;
+/*     */   }
+/*     */   
+/*     */   private boolean slendermanDirectLook(EntityPlayer var1)
+/*     */   {
+/* 364 */     if (field_70170_p.func_72883_k(MathHelper.func_76128_c(field_70165_t), MathHelper.func_76128_c(field_70163_u), MathHelper.func_76128_c(field_70161_v)) < 1)
+/*     */     {
+/* 366 */       return false;
+/*     */     }
+/*     */     
+/*     */ 
+/* 370 */     Vec3 var2 = var1.func_70676_i(1.0F).func_72432_b();
+/* 371 */     Vec3 var3 = Vec3.func_72443_a(field_70165_t - field_70165_t, field_70121_D.field_72338_b + field_70131_O - field_70163_u + var1.func_70047_e(), field_70161_v - field_70161_v);
+/* 372 */     double var4 = var3.func_72433_c();
+/* 373 */     var3 = var3.func_72432_b();
+/* 374 */     double var6 = var2.func_72430_b(var3);
+/*     */     
+/* 376 */     if (var6 > 1.0D - 0.025D / var4)
+/*     */     {
+/*     */ 
+/* 379 */       if (var1.func_70685_l(this))
+/*     */       {
+/* 381 */         petrifyTimer = field_70146_Z.nextInt(100);
+/*     */       }
+/*     */       
+/* 384 */       return var1.func_70685_l(this);
+/*     */     }
+/*     */     
+/*     */ 
+/*     */ 
+/* 389 */     return false;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   private boolean canSlendermanBeSeen(EntityPlayer var1)
+/*     */   {
+/* 396 */     return (!var1.func_70685_l(this)) && (!LineOfSightCheck(var1)) ? false : isInFieldOfVision(this, var1, 65.0F, 65.0F);
+/*     */   }
+/*     */   
+/*     */   private boolean LineOfSightCheck(EntityPlayer var1)
+/*     */   {
+/* 401 */     return (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + func_70047_e(), field_70161_v), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + field_70131_O, field_70161_v), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + field_70131_O * 0.1D, field_70161_v), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t + 0.7D, field_70163_u + func_70047_e(), field_70161_v), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t - 0.7D, field_70163_u + func_70047_e(), field_70161_v), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + func_70047_e(), field_70161_v + 0.7D), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + func_70047_e(), field_70161_v - 0.7D), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + field_70131_O * 1.2D, field_70161_v - 0.7D), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null) || (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + field_70131_O * 1.2D + 1.0D, field_70161_v), Vec3.func_72443_a(field_70165_t, field_70163_u + var1.func_70047_e(), field_70161_v)) == null);
+/*     */   }
+/*     */   
+/*     */   private MovingObjectPosition rayTraceBlocks(Vec3 var1, Vec3 var2)
+/*     */   {
+/* 406 */     boolean var3 = false;
+/* 407 */     boolean var4 = false;
+/*     */     
+/* 409 */     if ((!Double.isNaN(field_72450_a)) && (!Double.isNaN(field_72448_b)) && (!Double.isNaN(field_72449_c)))
+/*     */     {
+/* 411 */       if ((!Double.isNaN(field_72450_a)) && (!Double.isNaN(field_72448_b)) && (!Double.isNaN(field_72449_c)))
+/*     */       {
+/* 413 */         int var5 = MathHelper.func_76128_c(field_72450_a);
+/* 414 */         int var6 = MathHelper.func_76128_c(field_72448_b);
+/* 415 */         int var7 = MathHelper.func_76128_c(field_72449_c);
+/* 416 */         int var8 = MathHelper.func_76128_c(field_72450_a);
+/* 417 */         int var9 = MathHelper.func_76128_c(field_72448_b);
+/* 418 */         int var10 = MathHelper.func_76128_c(field_72449_c);
+/* 419 */         int var11 = Block.func_149682_b(field_70170_p.func_147439_a(var8, var9, var10));
+/* 420 */         int var12 = field_70170_p.func_72805_g(var8, var9, var10);
+/* 421 */         Block var13 = Block.func_149729_e(var11);
+/*     */         
+/* 423 */         if (((!var4) || (var13 == null) || (var13.func_149668_a(field_70170_p, var8, var9, var10) != null)) && (var11 > 0) && (var13.func_149678_a(var12, var3)))
+/*     */         {
+/* 425 */           MovingObjectPosition var14 = var13.func_149731_a(field_70170_p, var8, var9, var10, var1, var2);
+/*     */           
+/* 427 */           if (var14 != null)
+/*     */           {
+/* 429 */             return var14;
+/*     */           }
+/*     */         }
+/*     */         
+/* 433 */         int var42 = 200;
+/*     */         
+/* 435 */         while (var42-- >= 0)
+/*     */         {
+/* 437 */           if ((Double.isNaN(field_72450_a)) || (Double.isNaN(field_72448_b)) || (Double.isNaN(field_72449_c)))
+/*     */           {
+/* 439 */             return null;
+/*     */           }
+/*     */           
+/* 442 */           if ((var8 == var5) && (var9 == var6) && (var10 == var7))
+/*     */           {
+/* 444 */             return null;
+/*     */           }
+/*     */           
+/* 447 */           boolean var15 = true;
+/* 448 */           boolean var16 = true;
+/* 449 */           boolean var17 = true;
+/* 450 */           double var18 = 999.0D;
+/* 451 */           double var20 = 999.0D;
+/* 452 */           double var22 = 999.0D;
+/*     */           
+/* 454 */           if (var5 > var8)
+/*     */           {
+/* 456 */             var18 = var8 + 1.0D;
+/*     */           }
+/* 458 */           else if (var5 < var8)
+/*     */           {
+/* 460 */             var18 = var8 + 0.0D;
+/*     */           }
+/*     */           else
+/*     */           {
+/* 464 */             var15 = false;
+/*     */           }
+/*     */           
+/* 467 */           if (var6 > var9)
+/*     */           {
+/* 469 */             var20 = var9 + 1.0D;
+/*     */           }
+/* 471 */           else if (var6 < var9)
+/*     */           {
+/* 473 */             var20 = var9 + 0.0D;
+/*     */           }
+/*     */           else
+/*     */           {
+/* 477 */             var16 = false;
+/*     */           }
+/*     */           
+/* 480 */           if (var7 > var10)
+/*     */           {
+/* 482 */             var22 = var10 + 1.0D;
+/*     */           }
+/* 484 */           else if (var7 < var10)
+/*     */           {
+/* 486 */             var22 = var10 + 0.0D;
+/*     */           }
+/*     */           else
+/*     */           {
+/* 490 */             var17 = false;
+/*     */           }
+/*     */           
+/* 493 */           double var24 = 999.0D;
+/* 494 */           double var26 = 999.0D;
+/* 495 */           double var28 = 999.0D;
+/* 496 */           double var30 = field_72450_a - field_72450_a;
+/* 497 */           double var32 = field_72448_b - field_72448_b;
+/* 498 */           double var34 = field_72449_c - field_72449_c;
+/*     */           
+/* 500 */           if (var15)
+/*     */           {
+/* 502 */             var24 = (var18 - field_72450_a) / var30;
+/*     */           }
+/*     */           
+/* 505 */           if (var16)
+/*     */           {
+/* 507 */             var26 = (var20 - field_72448_b) / var32;
+/*     */           }
+/*     */           
+/* 510 */           if (var17)
+/*     */           {
+/* 512 */             var28 = (var22 - field_72449_c) / var34;
+/*     */           }
+/*     */           
+/*     */           byte var43;
+/*     */           
+/* 517 */           if ((var24 < var26) && (var24 < var28)) { byte var43;
+/*     */             byte var43;
+/* 519 */             if (var5 > var8)
+/*     */             {
+/* 521 */               var43 = 4;
+/*     */             }
+/*     */             else
+/*     */             {
+/* 525 */               var43 = 5;
+/*     */             }
+/*     */             
+/* 528 */             field_72450_a = var18;
+/* 529 */             field_72448_b += var32 * var24;
+/* 530 */             field_72449_c += var34 * var24;
+/*     */           }
+/* 532 */           else if (var26 < var28) { byte var43;
+/*     */             byte var43;
+/* 534 */             if (var6 > var9)
+/*     */             {
+/* 536 */               var43 = 0;
+/*     */             }
+/*     */             else
+/*     */             {
+/* 540 */               var43 = 1;
+/*     */             }
+/*     */             
+/* 543 */             field_72450_a += var30 * var26;
+/* 544 */             field_72448_b = var20;
+/* 545 */             field_72449_c += var34 * var26;
+/*     */           }
+/*     */           else {
+/*     */             byte var43;
+/* 549 */             if (var7 > var10)
+/*     */             {
+/* 551 */               var43 = 2;
+/*     */             }
+/*     */             else
+/*     */             {
+/* 555 */               var43 = 3;
+/*     */             }
+/*     */             
+/* 558 */             field_72450_a += var30 * var28;
+/* 559 */             field_72448_b += var32 * var28;
+/* 560 */             field_72449_c = var22;
+/*     */           }
+/*     */           
+/* 563 */           Vec3 var37 = Vec3.func_72443_a(field_72450_a, field_72448_b, field_72449_c);
+/* 564 */           var8 = (int)(field_72450_a = MathHelper.func_76128_c(field_72450_a));
+/*     */           
+/* 566 */           if (var43 == 5)
+/*     */           {
+/* 568 */             var8--;
+/* 569 */             field_72450_a += 1.0D;
+/*     */           }
+/*     */           
+/* 572 */           var9 = (int)(field_72448_b = MathHelper.func_76128_c(field_72448_b));
+/*     */           
+/* 574 */           if (var43 == 1)
+/*     */           {
+/* 576 */             var9--;
+/* 577 */             field_72448_b += 1.0D;
+/*     */           }
+/*     */           
+/* 580 */           var10 = (int)(field_72449_c = MathHelper.func_76128_c(field_72449_c));
+/*     */           
+/* 582 */           if (var43 == 3)
+/*     */           {
+/* 584 */             var10--;
+/* 585 */             field_72449_c += 1.0D;
+/*     */           }
+/*     */           
+/* 588 */           int var38 = Block.func_149682_b(field_70170_p.func_147439_a(var8, var9, var10));
+/* 589 */           int var39 = field_70170_p.func_72805_g(var8, var9, var10);
+/* 590 */           Block var40 = Block.func_149729_e(var38);
+/*     */           
+/* 592 */           if (((!var4) || (var40 == null) || (var40.func_149668_a(field_70170_p, var8, var9, var10) != null)) && (var38 > 0) && (var40.func_149678_a(var39, var3)) && (!isBlockTransparent(var38)))
+/*     */           {
+/* 594 */             MovingObjectPosition var41 = var40.func_149731_a(field_70170_p, var8, var9, var10, var1, var2);
+/*     */             
+/* 596 */             if (var41 != null)
+/*     */             {
+/* 598 */               return var41;
+/*     */             }
+/*     */           }
+/*     */         }
+/*     */         
+/* 603 */         return null;
+/*     */       }
+/*     */       
+/*     */ 
+/* 607 */       return null;
+/*     */     }
+/*     */     
+/*     */ 
+/*     */ 
+/* 612 */     return null;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   private boolean isBlockTransparent(int var1)
+/*     */   {
+/* 618 */     for (int var2 = 0; var2 < seeThrough.length; var2++)
+/*     */     {
+/* 620 */       if (var1 == seeThrough[var2])
+/*     */       {
+/* 622 */         return true;
+/*     */       }
+/*     */     }
+/*     */     
+/* 626 */     return false;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   protected boolean func_70692_ba()
+/*     */   {
+/* 632 */     return true;
+/*     */   }
+/*     */   
+/*     */   protected boolean teleportTo1(double var1, double var3, double var5)
+/*     */   {
+/* 637 */     double var7 = field_70165_t;
+/* 638 */     double var9 = field_70163_u;
+/* 639 */     double var11 = field_70161_v;
+/* 640 */     field_70165_t = var1;
+/* 641 */     field_70163_u = var3;
+/* 642 */     field_70161_v = var5;
+/* 643 */     boolean var13 = false;
+/* 644 */     int var14 = MathHelper.func_76128_c(field_70165_t);
+/* 645 */     int var15 = MathHelper.func_76128_c(field_70163_u);
+/* 646 */     int var16 = MathHelper.func_76128_c(field_70161_v);
+/*     */     
+/*     */ 
+/* 649 */     if (field_70170_p.func_72899_e(var14, var15, var16))
+/*     */     {
+/* 651 */       boolean var17 = false;
+/*     */       
+/* 653 */       while ((!var17) && (var15 > 0))
+/*     */       {
+/* 655 */         int var18 = Block.func_149682_b(field_70170_p.func_147439_a(var14, var15 - 1, var16));
+/*     */         
+/* 657 */         if ((var18 != 0) && (Block.func_149729_e(var18).func_149688_o().func_76220_a()))
+/*     */         {
+/* 659 */           var17 = true;
+/*     */         }
+/*     */         else
+/*     */         {
+/* 663 */           field_70163_u -= 1.0D;
+/* 664 */           var15--;
+/*     */         }
+/*     */       }
+/*     */       
+/* 668 */       if (var17)
+/*     */       {
+/* 670 */         func_70107_b(field_70165_t, field_70163_u, field_70161_v);
+/* 671 */         if ((field_70170_p.func_72945_a(this, field_70121_D).size() == 0) && (!field_70170_p.func_72953_d(field_70121_D)))
+/*     */         {
+/* 673 */           var13 = true;
+/*     */         }
+/*     */       }
+/*     */     }
+/*     */     
+/* 678 */     if (!var13)
+/*     */     {
+/* 680 */       func_70107_b(var7, var9, var11);
+/* 681 */       return false;
+/*     */     }
+/*     */     
+/*     */ 
+/* 685 */     boolean var17 = true;
+/* 686 */     return true;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   protected boolean teleportToEntity(Entity var1)
+/*     */   {
+/* 692 */     Vec3 var2 = Vec3.func_72443_a(field_70165_t - field_70165_t, field_70121_D.field_72338_b + field_70131_O / 2.0F - field_70163_u + var1.func_70047_e(), field_70161_v - field_70161_v);
+/* 693 */     var2 = var2.func_72432_b();
+/* 694 */     double var3 = 6.0D;
+/* 695 */     double var5 = field_70165_t + (field_70146_Z.nextDouble() - 0.5D) * 8.0D - field_72450_a * var3;
+/* 696 */     double var7 = field_70163_u + (field_70146_Z.nextInt(16) - 8) - field_72448_b * var3;
+/* 697 */     double var9 = field_70161_v + (field_70146_Z.nextDouble() - 0.5D) * 8.0D - field_72449_c * var3;
+/* 698 */     return teleportTo1(var5, var7, var9);
+/*     */   }
+/*     */   
+/*     */   private boolean isInFieldOfVision(Slendy var1, EntityPlayer var17, float var3, float var4)
+/*     */   {
+/* 703 */     float var5 = field_70177_z;
+/* 704 */     float var6 = field_70125_A;
+/* 705 */     faceEntity(var1, 360.0F, 360.0F, var17);
+/* 706 */     float var7 = field_70177_z;
+/* 707 */     float var8 = field_70125_A;
+/* 708 */     field_70177_z = var5;
+/* 709 */     field_70125_A = var6;
+/* 710 */     float var11 = field_70177_z - var3;
+/* 711 */     float var12 = field_70177_z + var3;
+/* 712 */     float var13 = field_70125_A - var4;
+/* 713 */     float var14 = field_70125_A + var4;
+/* 714 */     boolean var15 = GetFlag(var11, var12, var7, 0.0F, 360.0F);
+/* 715 */     boolean var16 = GetFlag(var13, var14, var8, -180.0F, 180.0F);
+/* 716 */     return (var15) && (var16) && ((var17.func_70685_l(var1)) || (LineOfSightCheck(var17)));
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   public void faceEntity(Entity par1Entity, float par2, float par3, EntityPlayer var4)
+/*     */   {
+/* 722 */     double d0 = field_70165_t - field_70165_t;
+/* 723 */     double d1 = field_70161_v - field_70161_v;
+/*     */     double d2;
+/*     */     double d2;
+/* 726 */     if ((par1Entity instanceof EntityLivingBase))
+/*     */     {
+/* 728 */       EntityLivingBase entitylivingbase = (EntityLivingBase)par1Entity;
+/* 729 */       d2 = field_70163_u + entitylivingbase.func_70047_e() - (field_70163_u + var4.func_70047_e());
+/*     */     }
+/*     */     else
+/*     */     {
+/* 733 */       d2 = (field_70121_D.field_72338_b + field_70121_D.field_72337_e) / 2.0D - (field_70163_u + var4.func_70047_e());
+/*     */     }
+/*     */     
+/* 736 */     double d3 = MathHelper.func_76133_a(d0 * d0 + d1 * d1);
+/* 737 */     float f2 = (float)(Math.atan2(d1, d0) * 180.0D / 3.141592653589793D) - 90.0F;
+/* 738 */     float f3 = (float)-(Math.atan2(d2, d3) * 180.0D / 3.141592653589793D);
+/* 739 */     field_70125_A = updateRotation(field_70125_A, f3, par3);
+/* 740 */     field_70177_z = updateRotation(field_70177_z, f2, par2);
+/*     */   }
+/*     */   
+/*     */   private float updateRotation(float par1, float par2, float par3)
+/*     */   {
+/* 745 */     float f3 = MathHelper.func_76142_g(par2 - par1);
+/*     */     
+/* 747 */     if (f3 > par3)
+/*     */     {
+/* 749 */       f3 = par3;
+/*     */     }
+/*     */     
+/* 752 */     if (f3 < -par3)
+/*     */     {
+/* 754 */       f3 = -par3;
+/*     */     }
+/*     */     
+/* 757 */     return par1 + f3;
+/*     */   }
+/*     */   
+/*     */   public boolean GetFlag(float var1, float var2, float var3, float var4, float var5)
+/*     */   {
+/* 762 */     if (var1 < var4)
+/*     */     {
+/* 764 */       if (var3 >= var1 + var5)
+/*     */       {
+/* 766 */         return true;
+/*     */       }
+/*     */       
+/* 769 */       if (var3 <= var2)
+/*     */       {
+/* 771 */         return true;
+/*     */       }
+/*     */     }
+/*     */     
+/* 775 */     if (var2 >= var5)
+/*     */     {
+/* 777 */       if (var3 <= var2 - var5)
+/*     */       {
+/* 779 */         return true;
+/*     */       }
+/*     */       
+/* 782 */       if (var3 >= var1)
+/*     */       {
+/* 784 */         return true;
+/*     */       }
+/*     */     }
+/*     */     
+/* 788 */     return (var3 <= var2) && (var3 > var1);
+/*     */   }
+/*     */   
+/*     */   public double getDistancetoEntityToAttack()
+/*     */   {
+/* 793 */     if ((field_70789_a instanceof EntityPlayer))
+/*     */     {
+/* 795 */       double var8 = field_70789_a.field_70165_t - field_70165_t;
+/* 796 */       double var3 = field_70789_a.field_70163_u - field_70163_u;
+/* 797 */       double var5 = field_70789_a.field_70161_v - field_70161_v;
+/*     */       
+/* 799 */       return MathHelper.func_76133_a(var8 * var8 + var3 * var3 + var5 * var5);
+/*     */     }
+/*     */     
+/*     */ 
+/* 803 */     EntityPlayer var1 = field_70170_p.func_72890_a(this, 200.0D);
+/*     */     
+/* 805 */     if (var1 != null)
+/*     */     {
+/* 807 */       double var2 = field_70165_t - field_70165_t;
+/* 808 */       double var4 = field_70163_u - field_70163_u;
+/* 809 */       double var6 = field_70161_v - field_70161_v;
+/* 810 */       return MathHelper.func_76133_a(var2 * var2 + var4 * var4 + var6 * var6);
+/*     */     }
+/*     */     
+/*     */ 
+/* 814 */     return 10.0D;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */   public double getDistance(int var1, int var2, int var3, int var4, int var5, int var6)
+/*     */   {
+/* 821 */     int var7 = var4 - var1;
+/* 822 */     int var8 = var5 - var2;
+/* 823 */     int var9 = var6 - var3;
+/* 824 */     return Math.sqrt(var7 * var7 + var8 * var8 + var9 * var9);
+/*     */   }
+/*     */   
+/*     */   private void findNearestTorch()
+/*     */   {
+/* 829 */     int var1 = (int)field_70165_t;
+/* 830 */     int var2 = (int)field_70163_u;
+/* 831 */     int var3 = (int)field_70161_v;
+/* 832 */     int var4 = var1 + 10;
+/* 833 */     int var5 = var2 + 10;
+/* 834 */     int var6 = var3 + 10;
+/* 835 */     int var7 = var1 - 10;
+/* 836 */     int var8 = var2 - 10;
+/* 837 */     int var9 = var3 - 10;
+/* 838 */     byte var10 = 100;
+/*     */     
+/* 840 */     for (int var11 = var7; var11 < var4; var11++)
+/*     */     {
+/* 842 */       int var12 = var8;
+/*     */       
+/* 844 */       while (var12 < var5)
+/*     */       {
+/* 846 */         int var13 = var9;
+/*     */         
+/*     */ 
+/*     */ 
+/* 850 */         while (var13 < var6)
+/*     */         {
+/*     */ 
+/*     */ 
+/* 854 */           if (getDistance(var1, var2, var3, var11, var12, var13) <= var10)
+/*     */           {
+/* 856 */             int var14 = Block.func_149682_b(field_70170_p.func_147439_a(var11, var12, var13));
+/* 857 */             Block var15 = var14 <= 0 ? null : Block.func_149729_e(var14);
+/*     */             
+/* 859 */             if ((var15 != null) && ((var15 == Blocks.field_150478_aa) || (var15 == Blocks.field_150429_aA) || (var15 == Blocks.field_150344_f) || (var15 == Blocks.field_150336_V) || (var15 == Blocks.field_150466_ao) || (var15 == Blocks.field_150359_w) || (var15 == Blocks.field_150454_av) || (var15 == Blocks.field_150415_aT) || (var15 == Blocks.field_150379_bu) || (var15 == Blocks.field_150451_bX) || (var15 == Blocks.field_150426_aN)) && (rayTraceBlocks(Vec3.func_72443_a(field_70165_t, field_70163_u + func_70047_e(), field_70161_v), Vec3.func_72443_a(var11, var12, var13)) == null) && (rayTraceBlocks(Vec3.func_72443_a(field_70789_a.field_70165_t, field_70789_a.field_70163_u + field_70789_a.func_70047_e(), field_70789_a.field_70161_v), Vec3.func_72443_a(var11, var12, var13)) == null))
+/*     */             {
+/* 861 */               if (destroyPerGo)
+/*     */                 break;
+/* 863 */               if (var15 == Blocks.field_150359_w)
+/*     */               {
+/* 865 */                 field_70170_p.func_72956_a(this, "random.glass", func_70599_aP() + 10.0F, 1.0F);
+/*     */               }
+/*     */               
+/* 868 */               if ((var15 == Blocks.field_150466_ao) || (var15 == Blocks.field_150454_av))
+/*     */               {
+/* 870 */                 field_70170_p.func_72956_a(this, "mob.zombie.woodbreak", func_70599_aP() + 10.0F, 1.0F);
+/*     */               }
+/* 872 */               var15.func_149697_b(field_70170_p, var11, var12, var13, 1, 1);
+/* 873 */               field_70170_p.func_72921_c(var11, var12, var13, 0, 10);
+/* 874 */               field_70170_p.func_147468_f(var11, var12, var13);
+/* 875 */               destroyPerGo = true; break;
+/*     */             }
+/*     */           }
+/*     */           
+/*     */ 
+/*     */ 
+/*     */ 
+/* 882 */           var13++;
+/*     */         }
+/*     */         
+/*     */ 
+/*     */ 
+/* 887 */         var12++;
+/*     */       }
+/*     */     }
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   public boolean attackEntityFrom(DamageSource var1, int var2)
+/*     */   {
+/* 904 */     if (var1 == null)
+/*     */     {
+/* 906 */       return false;
+/*     */     }
+/*     */     
+/*     */ 
+/* 910 */     if ((var1.func_76364_f() instanceof EntityPlayer))
+/*     */     {
+/* 912 */       EntityPlayer var3 = (EntityPlayer)var1.func_76364_f();
+/* 913 */       ItemStack var4 = field_71071_by.func_70448_g();
+/*     */       
+/* 915 */       if (field_70170_p.field_73013_u.func_151525_a() > 2)
+/*     */       {
+/* 917 */         if ((var4 != null) && ((var4.func_77973_b() == Items.field_151048_u) || (var4.func_77973_b() == SlenderMan.itemSlenderSword)))
+/*     */         {
+/* 919 */           super.func_70097_a(var1, var2);
+/* 920 */           double newRandX = randomXonCircle(10, 40, field_70165_t);
+/* 921 */           double newRandZ = randomZonCircle(10, 40, field_70161_v);
+/* 922 */           teleportTo1(newRandX, field_70163_u, newRandZ);
+/*     */         }
+/*     */         
+/*     */       }
+/* 926 */       else if ((var4 != null) && ((var4.func_77973_b() == Items.field_151048_u) || (var4.func_77973_b() == Items.field_151041_m) || (var4.func_77973_b() == Items.field_151052_q) || (var4.func_77973_b() == SlenderMan.itemSlenderSword)))
+/*     */       {
+/* 928 */         super.func_70097_a(var1, var2);
+/* 929 */         double newRandX = randomXonCircle(10, 40, field_70165_t);
+/* 930 */         double newRandZ = randomZonCircle(10, 40, field_70161_v);
+/* 931 */         teleportTo1(newRandX, field_70163_u, newRandZ);
+/*     */       }
+/*     */     }
+/*     */     
+/* 935 */     return false;
+/*     */   }
+/*     */   
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   protected String func_70673_aS()
+/*     */   {
+/* 945 */     return "dg_slender:death";
+/*     */   }
+/*     */   
+/*     */ 
+/*     */   public void func_70106_y()
+/*     */   {
+/* 951 */     SlenderMan.spawned = true;
+/* 952 */     field_70128_L = true;
+/* 953 */     opacity = 0.0F;
+/*     */   }
+/*     */ }
+
+/* Location:           F:\MCP\InfiniboxMod\libs\SlenderMan-3.3_1.7.10.jar
+ * Qualified Name:     net.dudgames.slender.entity.EntitySlenderMan
+ * Java Class Version: 6 (50.0)
+ * JD-Core Version:    0.7.1
+ */

@@ -3,4 +3,12 @@ package com.monsterspawned.infinibox.proxy;
 public interface IProxy
 {
     public abstract void registerKeyBindings();
+    
+    public abstract void registerRenderers();
+    
+    public abstract void registerDevThings();
+    
+    public abstract void AddEvents();
+    
+    public abstract void load();
 }

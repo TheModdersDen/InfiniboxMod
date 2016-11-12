@@ -7,4 +7,25 @@ public class ServerProxy extends CommonProxy
     {
         // NOOP
     }
+
+	public void registerRenderers() {
+		//NOOP.
+		
+	}
+
+	@Override
+	public void registerDevThings() {
+		// TODO Add dev stuff...
+		
+	}
+
+	@Override
+	public void AddEvents() {
+		
+	}
+
+	@Override
+	public void load() {
+		
+	}
 }

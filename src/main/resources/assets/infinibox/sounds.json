@@ -1,0 +1,9 @@
+{
+   "attack": {"category": "master","sounds": [{"name": "attack","stream": false}]},
+   "close": {"category": "master","sounds": [{"name": "close","stream": false}]},
+   "death": {"category": "master","sounds": [{"name": "death","stream": false}]},
+   "lights": {"category": "master","sounds": [{"name": "lights","stream": false}]},
+   "living": {"category": "master","sounds": [{"name": "living","stream": false}]},
+   "scare": {"category": "master","sounds": [{"name": "scare","stream": false}]},
+   "static": {"category": "master","sounds": [{"name": "static","stream": false}]}
+}

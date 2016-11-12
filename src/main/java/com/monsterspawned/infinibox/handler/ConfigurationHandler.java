@@ -12,7 +12,9 @@ public class ConfigurationHandler
 {
     public static Configuration configuration;
     public static boolean testValue = false;
-
+    public static boolean canSlendySpawn = false;
+    public static int SlendyID = 3;
+    
     public static void init(File configFile)
     {
         // Create the configuration object from the given configuration file
@@ -26,7 +28,8 @@ public class ConfigurationHandler
     private static void loadConfiguration()
     {
         testValue = configuration.getBoolean("configValue", Configuration.CATEGORY_GENERAL, false, "This is an example configuration value");
-
+        canSlendySpawn = configuration.getBoolean("canSlendySpawn", Configuration.CATEGORY_GENERAL, false, "Can Slendy spawn");
+        SlendyID = configuration.getInt("slendyID", Configuration.CATEGORY_GENERAL, 3, 0, 2000, "Slendy ID");
         if (configuration.hasChanged())
         {
             configuration.save();

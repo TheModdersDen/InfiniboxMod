@@ -1,0 +1,36 @@
+package com.monsterspawned.infinibox.proxy;
+
+import com.jadarstudios.developercapes.DevCapes;
+import com.monsterspawned.infinibox.client.settings.Keybindings;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
+
+public class ClientProxy extends CommonProxy
+{
+	DevCapes devCapes = DevCapes.getInstance();
+    @Override
+    public void registerKeyBindings()
+    {
+        ClientRegistry.registerKeyBinding(Keybindings.charge);
+        ClientRegistry.registerKeyBinding(Keybindings.release);
+    }
+
+	@Override
+	public void registerRenderers() {
+		// TODO Add entity stuff...
+		
+	}
+
+	@Override
+	public void registerDevThings() {
+		devCapes.registerConfig("");
+		// TODO Add dev stuff...
+		
+	}
+
+	@Override
+	public void AddEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+}

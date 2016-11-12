@@ -1,0 +1,7 @@
+package com.monsterspawned.infinibox.cmds;
+
+import net.minecraft.command.ICommand;
+
+public class MakeADeal implements ICommand{
+
+}
