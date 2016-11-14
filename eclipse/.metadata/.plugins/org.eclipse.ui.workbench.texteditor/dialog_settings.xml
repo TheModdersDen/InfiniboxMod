@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="static" key="selection"/>
+		<item value="dg_slender" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="dg_slender"/>
 			<item value="static"/>
 			<item value="renderGameOverlay"/>
 			<item value="Static"/>
@@ -15,7 +16,6 @@
 			<item value="Slendy"/>
 			<item value="entity"/>
 			<item value=".png"/>
-			<item value="Slenderman"/>
 		</list>
 		<list key="replacehistory">
 		</list>

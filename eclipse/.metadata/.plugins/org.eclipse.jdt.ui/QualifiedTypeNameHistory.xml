@@ -48,7 +48,6 @@
 <fullyQualifiedTypeName name="cpw.mods.fml.common.gameevent.TickEvent"/>
 <fullyQualifiedTypeName name="com.skcraft.playblock.client.ClientTickHandler"/>
 <fullyQualifiedTypeName name="net.minecraft.world.World"/>
-<fullyQualifiedTypeName name="com.monsterspawned.infinibox.entities.InfiniboxMob"/>
 <fullyQualifiedTypeName name="com.monsterspawned.infinibox.handler.ConfigurationHandler"/>
 <fullyQualifiedTypeName name="net.minecraftforge.client.event.RenderGameOverlayEvent"/>
 <fullyQualifiedTypeName name="com.monsterspawned.infinibox.Infinibox"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="com.monsterspawned.infinibox.cmds.Conjure"/>
 <fullyQualifiedTypeName name="com.monsterspawned.infinibox.entities.aggressive.Slendy"/>
 <fullyQualifiedTypeName name="com.monsterspawned.infinibox.reference.Reference"/>
+<fullyQualifiedTypeName name="com.monsterspawned.infinibox.entities.InfiniboxMob"/>
 </qualifiedTypeNameHistroy>

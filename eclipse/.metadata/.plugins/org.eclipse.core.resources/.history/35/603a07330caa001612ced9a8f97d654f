@@ -934,7 +934,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 /*     */ 
 /*     */   protected String getDeathSound()
 /*     */   {
-/* 945 */     return "infinibox:death";
+/* 945 */     return "dg_slender:death";
 /*     */   }
 /*     */   
 /*     */ 
